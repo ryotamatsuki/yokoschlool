@@ -1,0 +1,51 @@
+{
+  "project": "NEON RIFT retro pixel-art overhaul",
+  "constraints": {
+    "gameplay_logic": "unchanged",
+    "copyright": "original assets only, no existing franchise characters or logos",
+    "style": "original 16-bit-inspired sci-fi pixel art",
+    "background": "transparent for sprite/tileset sheets"
+  },
+  "prompts": [
+    {
+      "id": "player_fx",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Main hero Rio / Rescue Unit 07 in teal-cyan armor: idle, run, jump, fall, dash, hurt; pulse/fan/lance projectiles; enemy orb; health and weapon pickups; jump dust, dash trail, hit sparks, small/large explosions, pickup sparkle."
+    },
+    {
+      "id": "enemies_skyline",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Stage 1 Rainy Skyline enemies: steel-gray security walker with teal/orange accents and hovering patrol drone; idle/walk/hover, attack, hurt, death, debris and muzzle flash."
+    },
+    {
+      "id": "enemies_foundry",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Stage 2 Foundry enemies: dark iron/rust walker and furnace-core hover drone with ember-orange glow; idle/walk/hover, attack, hurt, death, debris and muzzle flash."
+    },
+    {
+      "id": "enemies_core",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Stage 3 The Core enemies: indigo AI defense walker and ring-like sentinel drone with violet eye and cyan circuitry; idle/walk/hover, attack, hurt, death and debris."
+    },
+    {
+      "id": "boss_warden",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Stage 1 boss WARDEN: giant skyline guardian machine, steel gray, teal core, orange warning lights; idle, charge, fire, damage, defeat, weak-point core."
+    },
+    {
+      "id": "boss_crucible",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Stage 2 boss CRUCIBLE: giant foundry furnace titan, heavy iron plating, molten orange core, pistons and vents; idle, charge, fire, damage, defeat, weak-point core."
+    },
+    {
+      "id": "boss_null_crown",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Stage 3 boss NULL CROWN: regal AI core machine with crown silhouette, central eye, violet-cyan circuitry and geometric halo; idle, charge, fire, damage, defeat, weak-point core."
+    },
+    {
+      "id": "stage_skyline",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Stage 1 Rainy Skyline environment sheet: four tileable parallax strips (storm sky, far city, mid city, near rooftops), platform/floor tiles, antennae, warning lights, neon panels, pipes, supports, energized gap hazards."
+    },
+    {
+      "id": "stage_foundry",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Stage 2 Foundry environment sheet: smoky sky, distant factory silhouettes, industrial midground, near machinery/piping; iron/grate/furnace floor tiles, tanks, valves, vents, chains, supports, molten metal hazards."
+    },
+    {
+      "id": "stage_core",
+      "prompt": "Retro 2D pixel art for NEON RIFT, late-1980s/1990s 16-bit arcade style, crisp pixel clusters, strong silhouettes, limited readable palette, transparent background, no text, production-friendly sprite sheet. Stage 3 The Core environment sheet: dark void, machine towers, circuitry structures, angular core architecture; luminous floor/panel tiles, cables, server pillars, energy nodes, warning lights, arches, data-void hazards."
+    }
+  ]
+}
