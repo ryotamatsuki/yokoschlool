@@ -1,0 +1,17 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const elements=new Map(),listeners={};const gradient={addColorStop(){}};const ctx=new Proxy({createLinearGradient:()=>gradient},{get:(t,k)=>t[k]||(()=>{})});
+function element(id){if(!elements.has(id))elements.set(id,{id,textContent:'',innerHTML:'',hidden:false,value:'casual',style:{},checked:true,classList:{add(){},remove(){}},addEventListener(type,fn){this[type]=fn},querySelector:()=>element('heading'),getBoundingClientRect:()=>({width:960,height:540}),getContext:()=>ctx,blur(){},setPointerCapture(){}});return elements.get(id);}
+const sandbox={console,Math,Set,Map,Number,String,performance:{now:()=>0},localStorage:{getItem:()=>null,setItem(){}},ResizeObserver:class{observe(){}},requestAnimationFrame(){},document:{getElementById:element,querySelectorAll:()=>[],body:{classList:{add(){},remove(){}}},activeElement:{tagName:'BODY'},addEventListener(){}},window:{addEventListener(t,f){listeners[t]=f}}};
+let source=fs.readFileSync(require('node:path').join(__dirname,'../game.js'),'utf8');source=source.replace(/\}\)\(\);\s*$/,`globalThis.test={setup,start,update,draw,jump,hurt,pause,finish,damageEnemy,resize,keys,get:()=>({player,enemies,boss,zone,state,score,shots,checkpoint,W}), set:(x)=>{if('state'in x)state=x.state;if('boss'in x)boss=x.boss;}};})();`);vm.runInNewContext(source,sandbox);const g=sandbox.test;
+function steps(n){for(let i=0;i<n;i++)if(g.get().state==='playing')g.update(1/120);}
+g.start();steps(120);assert.equal(g.get().player.y,410);g.jump();steps(12);g.jump();assert.equal(g.get().player.jumps,2);let v=g.get().player.vy;g.jump();assert.equal(g.get().player.vy,v);console.log('PASS ground collision and double-jump limit');
+g.setup(0);g.get().player.inv=0;let hp=g.get().player.hp;g.hurt();g.hurt();assert.equal(g.get().player.hp,hp-1);console.log('PASS damage invulnerability');
+g.get().player.x=1860;steps(1);assert.equal(g.get().checkpoint,1810);g.hurt(true);assert.equal(g.get().player.x,1810);assert(g.get().player.hp>0);console.log('PASS checkpoint and fall recovery');
+g.pause();assert.equal(g.get().state,'paused');g.pause();assert.equal(g.get().state,'playing');console.log('PASS pause and resume');
+for(let z=0;z<3;z++){g.setup(z);g.get().player.x=3495;steps(1);const b=g.get().boss;assert(b&&b.hp>0);g.damageEnemy(b,{power:999,x:b.x,y:b.y});steps(350);assert.equal(g.get().state,z===2?'win':'playing');if(z<2)assert.equal(g.get().zone,z+1);}console.log('PASS all three bosses, stage transitions and victory');
+g.start();g.get().player.hp=1;g.get().player.inv=0;g.hurt();assert.equal(g.get().state,'dead');element('start').onclick();assert.equal(g.get().state,'playing');assert(g.get().player.hp>0);console.log('PASS game over and retry');
+// Traverse actual authored geometry with ordinary movement and timed jumps.
+g.start();g.keys.add('right');for(let i=0;i<2200;i++){const p=g.get().player;p.inv=5;if((p.x>1120&&p.x<1440)||(p.x>2370&&p.x<2700)){if(p.ground)g.jump();if(p.vy>0&&p.jumps===1)g.jump();}steps(1);if(g.get().boss)break;}assert(g.get().boss);console.log('PASS authored level traversal to boss');
+// Ordinary auto-fire can defeat every boss without special weapons.
+for(let z=0;z<3;z++){g.setup(z);g.keys.clear();g.get().player.x=3580;for(let i=0;i<6000;i++){g.get().player.inv=5;steps(1);if(g.get().zone!==z||g.get().state==='win')break;}assert(z===2?g.get().state==='win':g.get().zone===z+1);}console.log('PASS basic weapon reaches and defeats all boss patterns');
+g.draw();console.log('PASS drawing smoke check');
