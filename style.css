@@ -7,3 +7,4 @@
 #app:fullscreen header{display:flex;position:absolute;top:8px;right:max(12px,env(safe-area-inset-right));height:34px;z-index:8}#app:fullscreen header .brand,#app:fullscreen header .edition{display:none}
 @media(max-height:500px) and (orientation:landscape){header{display:flex;position:absolute;top:8px;right:max(12px,env(safe-area-inset-right));height:34px;z-index:8}header .brand,header .edition{display:none}.hud .score{margin-right:165px}}
 #app:fullscreen .hud .score{margin-right:165px}
+body:not(.playing) #touch{display:none}
