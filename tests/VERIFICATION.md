@@ -2,25 +2,32 @@
 
 ## Automated
 
-`node tests/simulation.cjs` — all checks pass:
-- platform landing and double-jump limit
-- invulnerability after damage
-- checkpoint and fall recovery
+`node tests/simulation.cjs` passes the gameplay QA regression suite with an explicit `Image` mock and Canvas mock. The suite covers:
+
+- ground collision and double-jump limit
+- damage invulnerability
+- checkpoint retry rollback, including the hidden kill/drop counter
 - pause/resume
+- player-facing manual fire even when a boss is behind the player
+- target-gated auto-fire with a visible forward aiming cone
+- manual FIRE input while auto-fire is disabled
+- swept projectile hitboxes and platform/terrain shielding
+- suppression of off-screen enemy attacks
+- boss-arena boundaries and boss-body blocking
+- continuously animated boss-clear particles
+- distinct geometry/enemy mixes for all three stages
+- distinct attack patterns for WARDEN, CRUCIBLE and NULL CROWN
+- traversal of all three authored stage geometries with ordinary movement/double jumps
 - three boss transitions and final victory
-- death and retry
-- authored geometry traversal using movement/jumps
-- ordinary auto-fire can damage and defeat each boss
-- drawing smoke test with mocked Canvas
+- mobile FIRE button, dynamic zone label, and sound-on UI contract
+- drawing smoke test with mocked Image/Canvas
 
-The traversal and weapon tests deliberately suppress incoming damage to isolate geometry and hit reachability. They do not establish difficulty balance or guarantee a human no-damage clear.
+The traversal test suppresses incoming damage so it isolates geometry reachability rather than difficulty balance.
 
-## Browser
+## Browser / device scope
 
-Public GitHub Pages opened successfully. Title rendering, start, keyboard jump and pause inspected. Portrait (390 × 844) and landscape (844 × 390) iframe viewports inspected, with jump/dash buttons exercised. These are Chromium responsive viewport checks, not physical iOS/Android or multitouch device certification.
+The code retains pointer-based simultaneous controls and responsive portrait/landscape layouts. The regression suite is deterministic Node simulation; physical iPhone/Android multi-touch remains a device-level check rather than something this Node suite can certify.
 
-Only browser extension metadata errors were observed in the inspected log; no game-source JavaScript errors were reported in that sample.
+## Gameplay rules audited in this pass
 
-## Materials
-
-Canvas primitives, system fonts, synthesized Web Audio. No third-party game assets, fonts, audio downloads or external runtime dependencies.
+Auto-aim is constrained to the character's facing direction and visible forward cone. Player and enemy projectiles use swept center-line collision rather than a fixed unrotated AABB. Platforms block both player and enemy shots. The boss arena is visually marked, stages use different layouts/enemy mixes, boss patterns differ, and boss-clear particles continue updating during the clear delay.
